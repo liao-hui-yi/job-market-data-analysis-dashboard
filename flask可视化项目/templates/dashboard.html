@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>python 数据分析 - 综合仪表盘</title>
+    <style>
+      body {
+        text-align: center;
+        background-color: #f5f5f5;
+        font-family: 'Microsoft YaHei', Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .chart-container {
+        margin: 20px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        max-width: 1200px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .chart-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      }
+      .chart-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+        display: inline-block;
+      }
+      .analysis-text {
+        margin-top: 25px;
+        text-align: left;
+        line-height: 1.8;
+        font-size: 15px;
+        color: #555;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 4px solid #3498db;
+      }
+      .analysis-text p {
+        margin-bottom: 10px;
+      }
+      .jumbotron {
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        margin-top: 50px;
+        border-radius: 0;
+      }
+      .jumbotron h2 {
+        font-weight: bold;
+      }
+      .navbar-inverse {
+        background: #2c3e50;
+        border: none;
+      }
+      .navbar-inverse .navbar-brand {
+        color: #ecf0f1;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .navbar-inverse .navbar-brand:hover {
+        color: #3498db;
+      }
+    </style>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="/static/starter-template.css">
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+ <body>
+
+    <div class="jumbotron masthead" style="margin-top: 0;">
+  <div class="container">
+    <h2>数据分析综合仪表盘</h2>
+    <p>所有分析结果汇总展示</p>
+  </div>
+</div>
+
+    <div class="container">
+      <div class="chart-container">
+        <div class="chart-title">分析说明</div>
+        <p>本分析基于Boss直聘网站的数据分析职位招聘数据，涵盖了不同城市、薪资水平、学历要求、工作经验和行业分布等多个维度。</p>
+        <p>通过以下图表，您可以全面了解数据分析行业的就业情况和薪资水平，为职业规划提供参考。</p>
+      </div>
+
+      <!-- 不同城市的平均薪资 -->
+      <div class="chart-container">
+        <div class="chart-title">不同城市的平均薪资</div>
+        <div id="csxz-chart">{{ csxz_chart|safe }}</div>
+        <div class="analysis-text">
+          <p>• 通过上图，可以发现各个城市的均值与中位数差距不大，但是城市之间区别非常大</p>
+          <p>• 北上深杭这四个城市的工资水平远远高于其他城市，广州苏州稍为靠后</p>
+          <p>• 靠前的这几个城市也是全国经济最为发达的几个城市，而且都分布在东部</p>
+          <p>• 中西部城市薪资水平普遍低一些</p>
+        </div>
+      </div>
+
+      <!-- 薪资在四千至六千的岗位数量 -->
+      <div class="chart-container">
+        <div class="chart-title">薪资在四千至六千的岗位数量</div>
+        <div id="xinzi46-chart">{{ xinzi46_chart|safe }}</div>
+        <div class="analysis-text">
+          <p>• 由上可知，岗位人数最多的薪资水平较低，为4-6k</p>
+          <p>• 同时薪资水平在4-6k的岗位主要集中分布于郑州、青岛、南京、重庆、苏州、天津、成都、武汉、长沙等中西部城市</p>
+          <p>• 东部地区的"数据分析"岗位薪资基本不在4-6k范围</p>
+        </div>
+      </div>
+
+      <!-- 薪资小于八千的情况 -->
+      <div class="chart-container">
+        <div class="chart-title">薪资小于八千的情况</div>
+        <div id="xzxiao8-chart">{{ xzxiao8_chart|safe }}</div>
+        <div class="analysis-text">
+          <p>• 薪资水平小于8k的岗位主要集中分布于青岛、天津、郑州、重庆、成都、武汉等中西部城市</p>
+          <p>• 而北上广深杭等城市薪资水平小于8K的特别少</p>
+        </div>
+      </div>
+
+      <!-- 薪资大于八千的情况 -->
+      <div class="chart-container">
+        <div class="chart-title">薪资大于八千的情况</div>
+        <div id="xzda8-chart">{{ xzda8_chart|safe }}</div>
+        <div class="analysis-text">
+          <p>• 薪资水平大于8K的岗位分布区别则非常明显，北上广深杭的所占比重直接升至7%以上，青岛、郑州等城市所占比重则减少到3%左右</p>
+          <p>• 由此可见，低薪岗位主要分布于中西部城市；高薪岗位主要分布在东部城市，特别是一线城市</p>
+        </div>
+      </div>
+
+      <!-- 不同学历的薪资情况 -->
+      <div class="chart-container">
+        <div class="chart-title">不同学历的薪资情况</div>
+        <div id="xuelixz-chart">{{ xuelixz_chart|safe }}</div>
+        <div class="analysis-text">
+          <p>• 从学历方面来看，本科是一个分水岭</p>
+          <p>• 是否是本科，对薪资水平的影响还是很大的</p>
+          <p>• 而本科与硕士之间并没有特别大的差距</p>
+          <p>• 博士的薪资水平远远高于其他学历</p>
+        </div>
+      </div>
+
+      <!-- 不同学历的岗位情况 -->
+      <div class="chart-container">
+        <div class="chart-title">不同学历的岗位情况</div>
+        <div id="xueligw-chart">{{ xueligw_chart|safe }}</div>
+        <div class="analysis-text">
+          <p>• 从市场需求来看，要求本科占据绝大多数</p>
+          <p>• 该岗位对学历的门槛并不是很高，要求硕士的较少，而博士则是凤毛麟角</p>
+          <p>• 不过这也从侧面反映了社会上学历的分布状况，本科生及大专生占绝对多数</p>
+
+        </div>
+      </div>
+
+      <!-- 不同工作经验的薪资情况 -->
+      <div class="chart-container">
+        <div class="chart-title">不同工作经验的薪资情况</div>
+        <div id="gzjyxz-chart">{{ gzjyxz_chart|safe }}</div>
+        <div class="analysis-text">
+          <p>• 应届生的工资还是比较低的，和工作经验一年内的差距并不大</p>
+          <p>• 但是随着工作年限的增加，迈过3年工作经验这个门槛，工资水平将直线上升</p>
+          <p>• 说明这个岗位是一个需要累积丰富经验的岗位</p>
+        </div>
+      </div>
+
+      <!-- 不同工作经验的岗位情况 -->
+      <div class="chart-container">
+        <div class="chart-title">不同工作经验的岗位情况</div>
+        <div id="gzjygw-chart">{{ gzjygw_chart|safe }}</div>
+        <div class="analysis-text">
+          <p>• 我们发现，市场上对于工作经验的要求还是很强烈的</p>
+          <p>• 1-5年的经验要求占绝大多数</p>
+          <p>• 而应届生和10年以上的需求则非常少</p>
+          <p>• 工作经验是入职成功与否的关键因素</p>
+        </div>
+      </div>
+
+      <!-- 不同行业的薪资情况 -->
+      <div class="chart-container">
+        <div class="chart-title">不同行业的薪资情况</div>
+        <div id="hyxz-chart">{{ hyxz_chart|safe }}</div>
+        <div class="analysis-text">
+          <p>• 通过上图我们可以发现，互联网行业和电子商务对该岗位的需求非常大，同时薪资水平相比于其他行业也高了很多</p>
+          <p>• 而其他传统行业相对来说，无论是需求量还是薪资水平，都低一些</p>
+        </div>
+      </div>
+
+      <!-- 不同行业的岗位情况 -->
+      <div class="chart-container">
+        <div class="chart-title">不同行业的岗位情况</div>
+        <div id="hygw-chart">{{ hygw_chart|safe }}</div>
+        <div class="analysis-text">
+          <p>• 通过上图我们可以发现，互联网行业和电子商务对该岗位的需求非常大，同时薪资水平相比于其他行业也高了很多</p>
+          <p>• 而其他传统行业相对来说，无论是需求量还是薪资水平，都低一些</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ </body>
+</html>

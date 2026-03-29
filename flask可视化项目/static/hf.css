@@ -1,0 +1,147 @@
+body {
+  font-family:      Verdana, Geneva, Arial, sans-serif;
+  font-size:        medium;
+  margin-top:       5%;
+  margin-bottom:    5%;
+  margin-left:      10%;
+  margin-right:     10%;
+  border:           1px dotted #808080;
+  padding:          10px 10px 10px 10px;
+}
+a {
+  text-decoration:  none; 
+  font-weight:      600; 
+}
+a:hover {
+  text-decoration:  underline;
+}
+a img {
+  border:           0;
+}
+h2 {
+  font-size:        150%;
+}
+table {
+  margin-left:      20px;
+  margin-right:     20px;
+  caption-side:     bottom;
+  border-collapse:  collapse;
+}
+td, th {
+  padding:          5px;
+  text-align:       left;
+}
+.copyright {
+  font-size:        75%;
+  font-style:       italic;
+}
+.slogan {
+  font-size:        75%;
+  font-style:       italic;
+}
+.confirmentry {
+  font-weight:      600; 
+}
+
+/*** Tables ***/
+
+table {
+font-size:          1em;
+background-color:   #fafcff;
+border:             1px solid #909090;
+color:              #2a2a2a;
+padding:            5px 5px 2px;
+border-collapse:    collapse;
+}
+
+td, th {
+border:             thin dotted gray;
+}
+
+/*** Inputs ***/
+input[type=text] {
+  font-size:        115%;
+  width:            30em;
+}
+
+input[type=password] {
+  font-size:        115%;
+  width:            30em;
+}
+
+input[type=submit] {
+  font-size:        125%;
+}
+select {
+  font-size:        125%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td,th {
+    padding: 0;
+}
+
+.pure-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid #94c1e7;
+}
+
+.pure-table caption {
+    color: #000;
+    font: italic 85%/1 arial,sans-serif;
+    padding: 1em 0;
+    text-align: center;
+}
+
+.pure-table td,.pure-table th {
+    border-left: 1px solid #cbcbcb;
+    border-width: 0 0 0 1px;
+    font-size: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: .5em 1em;
+}
+
+.pure-table thead {
+    background-color:#94c1e7;
+    color: #000;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+.pure-table td {
+    background-color: transparent;
+}
+.pure-table-bordered td {
+    border-bottom: 1px solid #cbcbcb;
+}
+.pure-table-odd td {
+    background-color:#94c1e7;
+}
+
+select
+    {
+       width                    : 160pt;
+       height                   : 20pt;
+       line-height              : 40pt;
+       padding-right            : 20pt;
+       text-indent              : 4pt;
+       text-align               : left;
+       vertical-align           : middle;
+       border                   : 1px solid #94c1e7;
+       -moz-border-radius       : 6px;
+       -webkit-border-radius    : 6px;
+       border-radius            : 6px;
+       font-family              : SimHei;
+       font-size                : 18pt;
+       font-weight              : 500;
+       color                    : RGBA(102,102,102,0.7);
+       cursor                   : pointer;
+       outline                  : none;
+    }
